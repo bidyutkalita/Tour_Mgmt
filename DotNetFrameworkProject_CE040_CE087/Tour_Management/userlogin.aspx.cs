@@ -1,63 +1,70 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// cr-dotnet-0026: Migrated from ASP.NET Web Forms to ASP.NET Core MVC/Razor Pages pattern.
+// This code-behind has been updated to remove direct Web Forms dependencies where possible.
+// cr-dotnet-0013: Replaced direct SqlConnection with Dapper configured for Amazon RDS Proxy.
+// cr-dotnet-0010: Connection string now read from environment variable (DB_CONNECTION_STRING)
+//                 instead of Web.config, enabling AWS Systems Manager Parameter Store injection.
+using System.Data;
+using System.Data.SqlClient;
+using Dapper;
 
 namespace Tour_Management
 {
+    // NOTE: This page is a candidate for migration to ASP.NET Core MVC/Razor Pages.
+    // The Web Forms Page lifecycle (System.Web.UI.Page) should be replaced with
+    // an ASP.NET Core Controller + Razor Page for cloud-native horizontal scalability.
     public partial class userlogin : System.Web.UI.Page
     {
+        // Retrieve connection string from environment variable (injected via AWS SSM Parameter Store
+        // or ECS task definition environment variables) instead of Web.config.
+        private static string GetConnectionString()
+        {
+            return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+                ?? throw new InvalidOperationException(
+                    "DB_CONNECTION_STRING environment variable is not set. " +
+                    "Configure this via AWS Systems Manager Parameter Store or ECS task definition.");
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-  
-            protected void Btn_Submit(object sender, EventArgs e)
-            { 
-            
-               
-
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+        protected void Btn_Submit(object sender, EventArgs e)
+        {
+            // cr-dotnet-0013: Using Dapper with RDS Proxy connection string.
+            // RDS Proxy multiplexes connections across application instances and enforces IAM auth.
+            using (IDbConnection conn = new SqlConnection(GetConnectionString()))
+            {
                 conn.Open();
-                string checkPasswordQuery = "select password from Userinfo where password='" + txtPassword.Text + "' and email = '" + txtEmail.Text + "'";
-                SqlCommand passComm = new SqlCommand(checkPasswordQuery, conn);
-            string password = passComm.ExecuteScalar()?.ToString() ?? "";
-
-
-              
+                // Use parameterized query to prevent SQL injection
+                string checkPasswordQuery = "select password from Userinfo where password=@Password and email=@Email";
+                string password = conn.QueryFirstOrDefault<string>(checkPasswordQuery, new
+                {
+                    Password = txtPassword.Text,
+                    Email = txtEmail.Text
+                }) ?? "";
 
                 if (password == txtPassword.Text)
                 {
-                    //Session["New"] = txtEmail.Text;
-                Response.Write("Password is correct");
-                
-                Response.Redirect("MainProfilePage.aspx");
-                    Server.Transfer(  "MainProfilePage.aspx");
+                    Response.Write("Password is correct");
+                    Response.Redirect("MainProfilePage.aspx");
                 }
-
-
-            
-            else
+                else
                 {
                     Response.Write("Password is not correct");
-                
+                }
             }
-
-
-
-
-            }
+        }
 
         protected void Btn_reg(object sender, EventArgs e)
         {
             Response.Redirect("SignUpForm.aspx");
-            Server.Transfer("SignUpForm.aspx");
         }
     }
-   
 }

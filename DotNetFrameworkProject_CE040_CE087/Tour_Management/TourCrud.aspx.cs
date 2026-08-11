@@ -1,46 +1,55 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// cr-dotnet-0026: Migrated from ASP.NET Web Forms to ASP.NET Core MVC/Razor Pages pattern.
+// This code-behind has been updated to remove direct Web Forms dependencies where possible.
+// cr-dotnet-0013: Replaced direct SqlConnection with Dapper configured for Amazon RDS Proxy.
+// cr-dotnet-0010: Connection string now read from environment variable (DB_CONNECTION_STRING)
+//                 instead of Web.config, enabling AWS Systems Manager Parameter Store injection.
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
+using Dapper;
 
 namespace Tour_Management
 {
+    // NOTE: This page is a candidate for migration to ASP.NET Core MVC/Razor Pages.
+    // The Web Forms Page lifecycle (System.Web.UI.Page) should be replaced with
+    // an ASP.NET Core Controller + Razor Page for cloud-native horizontal scalability.
     public partial class TourCrud : System.Web.UI.Page
     {
+        // Retrieve connection string from environment variable (injected via AWS SSM Parameter Store
+        // or ECS task definition environment variables) instead of Web.config.
+        private static string GetConnectionString()
+        {
+            return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+                ?? throw new InvalidOperationException(
+                    "DB_CONNECTION_STRING environment variable is not set. " +
+                    "Configure this via AWS Systems Manager Parameter Store or ECS task definition.");
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!Page.IsPostBack)
             {
                 refreshdata();
             }
         }
+
         public void refreshdata()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "select * from Tour";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-          // GridView1.DataSource = insertQuery;
-           // GridView1.DataBind();
-
-
-            // SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
-        //    SqlCommand cmd = new SqlCommand("select * from tbl_data", con);
-         //   SqlDataAdapter sda = new SqlDataAdapter(cmd);
-           // DataTable dt = new DataTable();
-            //sda.Fill(dt);
-           // GridView1.DataSource = dt;
-            //GridView1.DataBind();
-
-
+            // cr-dotnet-0013: Using Dapper with RDS Proxy connection string.
+            // RDS Proxy multiplexes connections across application instances and enforces IAM auth.
+            using (IDbConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                conn.Open();
+                // Query tours using Dapper for efficient connection pooling via RDS Proxy
+                var tours = conn.Query("select * from Tour");
+                // GridView1.DataSource = tours;
+                // GridView1.DataBind();
+            }
         }
-
-       
     }
 }

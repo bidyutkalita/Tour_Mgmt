@@ -1,4 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allbooking.aspx.cs" Inherits="Tour_Management.allbooking" %>
+<%-- cr-dotnet-0026: This Web Forms page (.aspx) is a candidate for migration to ASP.NET Core MVC/Razor Pages.
+     Migrate to ASP.NET Core MVC Controller + Razor View or Razor Page for cloud-native horizontal scalability.
+     Web Forms ViewState and server-side event model should be replaced with stateless MVC/Razor Pages pattern. --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allbooking.aspx.cs" Inherits="Tour_Management.allbooking" %>
 
 <%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
 

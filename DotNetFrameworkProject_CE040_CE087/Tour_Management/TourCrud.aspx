@@ -1,4 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TourCrud.aspx.cs" Inherits="Tour_Management.TourCrud" %>
+<%-- cr-dotnet-0026: This Web Forms page (.aspx) is a candidate for migration to ASP.NET Core MVC/Razor Pages.
+     Migrate to ASP.NET Core MVC Controller + Razor View or Razor Page for cloud-native horizontal scalability.
+     Web Forms ViewState and server-side event model should be replaced with stateless MVC/Razor Pages pattern. --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TourCrud.aspx.cs" Inherits="Tour_Management.TourCrud" %>
 
 <!DOCTYPE html>
 
