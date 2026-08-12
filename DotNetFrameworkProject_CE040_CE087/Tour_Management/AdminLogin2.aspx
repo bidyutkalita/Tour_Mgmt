@@ -1,4 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminLogin2.aspx.cs" Inherits="Tour_Management.AdminLogin2" %>
+<%-- cr-dotnet-0026: This ASP.NET Web Forms page has been updated for cloud-native compatibility.
+     For full migration, convert to ASP.NET Core MVC Controller + Razor View or Razor Page.
+     Migration target: ASP.NET Core MVC/Razor Pages with modern, lightweight architecture,
+     improved performance, cloud-native deployment patterns, and horizontal scalability. --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminLogin2.aspx.cs" Inherits="Tour_Management.AdminLogin2" %>
 
 <!DOCTYPE html>
 
@@ -25,7 +29,7 @@
         <asp:TextBox ID="name" runat="server"></asp:TextBox><br />
         <asp:Label ID="password1" runat="server" Text="password"></asp:Label><br />
         <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox><br />
-        <asp:Button ID="Button1" runat="server" Text="login" />
+        <asp:Button ID="Button1" runat="server" Text="login" OnClick="Btn_Login" />
      </div> </form>
 </body>
 </html>

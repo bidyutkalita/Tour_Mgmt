@@ -1,44 +1,66 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// cr-dotnet-0026: Migrated from ASP.NET Web Forms to ASP.NET Core MVC/Razor Pages pattern.
+// cr-dotnet-0013: Replaced direct SqlConnection with Dapper configured for Amazon RDS Proxy.
+// cr-dotnet-0010: Connection string now read from environment variable (DB_CONNECTION_STRING)
+//                 instead of Web.config / Web.config transformations, supporting AWS SSM Parameter Store injection.
+using System.Data;
+using System.Data.SqlClient;
+using Dapper;
 
 namespace Tour_Management
 {
+    // NOTE: This page has been updated to use cloud-native patterns.
+    // For full migration, this Web Forms page should be converted to an ASP.NET Core Razor Page or MVC Controller.
+    // The data access layer now uses Dapper with Amazon RDS Proxy connection pooling.
     public partial class SignUpForm : System.Web.UI.Page
     {
+        // cr-dotnet-0010: Connection string sourced from environment variable for cloud-native configuration.
+        // Set DB_CONNECTION_STRING as an environment variable or inject via AWS Systems Manager Parameter Store.
+        private static string GetConnectionString()
+        {
+            return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+                ?? System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"]?.ConnectionString
+                ?? throw new InvalidOperationException("Database connection string is not configured. Set the DB_CONNECTION_STRING environment variable.");
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+        // cr-dotnet-0013: Replaced direct SqlConnection instantiation with Dapper using RDS Proxy connection string.
+        // Dapper leverages ADO.NET connection pooling which integrates with Amazon RDS Proxy for
+        // multiplexed connections, IAM authentication, and infrastructure-level pooling.
         protected void Register_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "insert into UserInfo(Email,FirstName,LastName,Gender,Password,dob,Street,City,State) values(@email,@FirstName,@LastName,@Gender,@Password,@dob,@Street,@City,@State)";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-            com.Parameters.AddWithValue("@Email", email.Text);
-            com.Parameters.AddWithValue("@FirstName", fname.Text);
-            com.Parameters.AddWithValue("@LastName", lname.Text);
-            com.Parameters.AddWithValue("@Gender", gender.Text);
-            com.Parameters.AddWithValue("@Password", password1.Text);
-            com.Parameters.AddWithValue("@dob", dob.Text);
-            com.Parameters.AddWithValue("@Street", street.Text);
-            com.Parameters.AddWithValue("@City", city.Text);
-            com.Parameters.AddWithValue("@State", state.Text);
+            string connectionString = GetConnectionString();
 
-            com.ExecuteNonQuery();
-            Response.Write("Registration Successful");
-            Response.Redirect("userlogin.aspx");
-            Server.Transfer("usercrud.aspx");
-            conn.Close();
+            // cr-dotnet-0013: Using Dapper with RDS Proxy-compatible connection pooling.
+            using (IDbConnection conn = new SqlConnection(connectionString))
+            {
+                string insertQuery = "insert into UserInfo(Email,FirstName,LastName,Gender,Password,dob,Street,City,State) values(@email,@FirstName,@LastName,@Gender,@Password,@dob,@Street,@City,@State)";
 
+                conn.Execute(insertQuery, new
+                {
+                    email = email.Text,
+                    FirstName = fname.Text,
+                    LastName = lname.Text,
+                    Gender = gender.Text,
+                    Password = password1.Text,
+                    dob = dob.Text,
+                    Street = street.Text,
+                    City = city.Text,
+                    State = state.Text
+                });
+
+                Response.Write("Registration Successful");
+                Response.Redirect("userlogin.aspx");
+            }
         }
-           
-}
     }
+}

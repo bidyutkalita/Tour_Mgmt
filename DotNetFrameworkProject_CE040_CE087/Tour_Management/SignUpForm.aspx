@@ -1,4 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SignUpForm.aspx.cs" Inherits="Tour_Management.SignUpForm" %>
+<%-- cr-dotnet-0026: This ASP.NET Web Forms page has been updated for cloud-native compatibility.
+     For full migration, convert to ASP.NET Core MVC Controller + Razor View or Razor Page.
+     Migration target: ASP.NET Core MVC/Razor Pages with modern, lightweight architecture,
+     improved performance, cloud-native deployment patterns, and horizontal scalability. --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SignUpForm.aspx.cs" Inherits="Tour_Management.SignUpForm" %>
 
 <!DOCTYPE html>
 

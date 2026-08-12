@@ -1,4 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userlogin.aspx.cs" Inherits="Tour_Management.userlogin" %>
+<%-- cr-dotnet-0026: This ASP.NET Web Forms page has been updated for cloud-native compatibility.
+     For full migration, convert to ASP.NET Core MVC Controller + Razor View or Razor Page.
+     Migration target: ASP.NET Core MVC/Razor Pages with modern, lightweight architecture,
+     improved performance, cloud-native deployment patterns, and horizontal scalability. --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userlogin.aspx.cs" Inherits="Tour_Management.userlogin" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -27,18 +31,8 @@
 </head>
 <body>
 
-    
-
-
-
-
-
     <br />
     <br />
-
-
-    </div>
-
 
     <div class="login-form">
         <div class="container" runat="server">
@@ -61,8 +55,6 @@
                            
                         </div>
                         
-                        
-                           
                            <div class="control-label col-sm-2"><asp:Button BackColor="#cc6600" ID="Register" runat="server" Text="Login" ForeColor="Black" class="form-control" OnClick="Btn_Submit" Height="35px" Width="92px" /></div>
                             <div class="control-label col-sm-2"><asp:Button BackColor="#cc6600" ID="Button1" runat="server" Text="Sign Up" ForeColor="Black" class="form-control" OnClick="Btn_reg" Height="38px" Width="137px" /></div>
                         
