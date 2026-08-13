@@ -1,0 +1,51 @@
+@page
+@model TourManagement.Web.Pages.Admin.LoginModel
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h1 class="text-center mb-4">Admin Login</h1>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white text-center">
+                <strong>Administrator Access</strong>
+            </div>
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="LoginForm.Email" class="form-label"></label>
+                        <input asp-for="LoginForm.Email" class="form-control" placeholder="Admin email" />
+                        <span asp-validation-for="LoginForm.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LoginForm.Password" class="form-label"></label>
+                        <input asp-for="LoginForm.Password" class="form-control" type="password" placeholder="Admin password" />
+                        <span asp-validation-for="LoginForm.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-danger">Admin Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-page="/User/Login">User Login</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

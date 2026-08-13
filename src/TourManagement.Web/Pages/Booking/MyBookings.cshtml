@@ -1,0 +1,55 @@
+@page
+@model TourManagement.Web.Pages.Booking.MyBookingsModel
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h1>My Bookings</h1>
+<hr />
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (!Model.Bookings.Any())
+{
+    <div class="alert alert-info">
+        You have no bookings yet. <a asp-page="/Tour/Index">Browse tours</a> to book one!
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Tour Name</th>
+                    <th>Place</th>
+                    <th>Booking Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model.Bookings)
+                {
+                    <tr>
+                        <td>@booking.BookingId</td>
+                        <td>@booking.TourName</td>
+                        <td>@booking.Place</td>
+                        <td>@booking.BookingDate.ToString("dd MMM yyyy")</td>
+                        <td>
+                            <form method="post" asp-page-handler="Cancel" asp-route-id="@booking.BookingId"
+                                  onsubmit="return confirm('Cancel this booking?')">
+                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<a asp-page="/Tour/Index" class="btn btn-primary mt-3">Browse More Tours</a>

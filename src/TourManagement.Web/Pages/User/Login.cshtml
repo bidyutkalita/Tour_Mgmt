@@ -1,0 +1,49 @@
+@page
+@model TourManagement.Web.Pages.User.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h1 class="text-center mb-4">User Login</h1>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="LoginForm.Email" class="form-label"></label>
+                        <input asp-for="LoginForm.Email" class="form-control" placeholder="Enter your email" />
+                        <span asp-validation-for="LoginForm.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LoginForm.Password" class="form-label"></label>
+                        <input asp-for="LoginForm.Password" class="form-control" type="password" placeholder="Enter your password" />
+                        <span asp-validation-for="LoginForm.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a asp-page="Register">Register here</a></p>
+            <p><a asp-page="/Admin/Login">Admin Login</a></p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

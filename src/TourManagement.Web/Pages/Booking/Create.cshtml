@@ -1,0 +1,61 @@
+@page
+@model TourManagement.Web.Pages.Booking.CreateModel
+@{
+    ViewData["Title"] = "Book a Tour";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1>Book a Tour</h1>
+        <hr />
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="BookingForm.TourName" class="form-label"></label>
+                        <input asp-for="BookingForm.TourName" class="form-control" />
+                        <span asp-validation-for="BookingForm.TourName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="BookingForm.Place" class="form-label"></label>
+                        <input asp-for="BookingForm.Place" class="form-control" />
+                        <span asp-validation-for="BookingForm.Place" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="BookingForm.Email" class="form-label"></label>
+                        <input asp-for="BookingForm.Email" class="form-control" />
+                        <span asp-validation-for="BookingForm.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="BookingForm.FirstName" class="form-label"></label>
+                        <input asp-for="BookingForm.FirstName" class="form-control" />
+                        <span asp-validation-for="BookingForm.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Confirm Booking</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a asp-page="/Tour/Index" class="btn btn-secondary">Back to Tours</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
