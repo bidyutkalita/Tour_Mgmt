@@ -1,46 +1,37 @@
-﻿using System;
+// This file has been migrated to ASP.NET Core Razor Pages.
+// New location: Pages/Tours/TourCrud.cshtml.cs
+//
+// Changes applied:
+// - cr-dotnet-0026: Replaced ASP.NET Web Forms (System.Web.UI.Page) with ASP.NET Core Razor Pages (PageModel)
+//   Eliminates ViewState, postbacks, and server affinity requirements for stateless horizontal scaling.
+// - cr-dotnet-0013: Replaced direct SqlConnection management with Entity Framework Core DbContext,
+//   enabling built-in connection pooling, retry logic, and Azure SQL Database integration
+//   with transient fault handling.
+// - cr-dotnet-0010: Replaced Web.config / ConfigurationManager.ConnectionStrings with
+//   ASP.NET Core IConfiguration reading from appsettings.{Environment}.json and
+//   environment variables (CONNECTIONSTRINGS__DBCONNECTION) for runtime configuration.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Tour_Management
 {
+    // MIGRATED: See Pages/Tours/TourCrud.cshtml.cs for the ASP.NET Core Razor Pages implementation.
     public partial class TourCrud : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!Page.IsPostBack)
-            {
-                refreshdata();
-            }
         }
+
         public void refreshdata()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "select * from Tour";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-          // GridView1.DataSource = insertQuery;
-           // GridView1.DataBind();
-
-
-            // SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
-        //    SqlCommand cmd = new SqlCommand("select * from tbl_data", con);
-         //   SqlDataAdapter sda = new SqlDataAdapter(cmd);
-           // DataTable dt = new DataTable();
-            //sda.Fill(dt);
-           // GridView1.DataSource = dt;
-            //GridView1.DataBind();
-
-
+            // MIGRATED to EF Core in Pages/Tours/TourCrud.cshtml.cs (OnGetAsync)
+            // Direct SqlConnection replaced with TourManagementDbContext (cr-dotnet-0013)
+            // ConfigurationManager replaced with IConfiguration / environment variables (cr-dotnet-0010)
         }
-
-       
     }
 }

@@ -1,7 +1,18 @@
-﻿using System;
+// This file has been migrated to ASP.NET Core Razor Pages.
+// New location: Pages/User/SignUp.cshtml.cs
+//
+// Changes applied:
+// - cr-dotnet-0026: Replaced ASP.NET Web Forms (System.Web.UI.Page) with ASP.NET Core Razor Pages (PageModel)
+//   Eliminates ViewState, postbacks, and server affinity requirements for stateless horizontal scaling.
+// - cr-dotnet-0013: Replaced direct SqlConnection management with Entity Framework Core DbContext,
+//   enabling built-in connection pooling, retry logic, and Azure SQL Database integration
+//   with transient fault handling.
+// - cr-dotnet-0010: Replaced Web.config / ConfigurationManager.ConnectionStrings with
+//   ASP.NET Core IConfiguration reading from appsettings.{Environment}.json and
+//   environment variables (CONNECTIONSTRINGS__DBCONNECTION) for runtime configuration.
+
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,36 +20,18 @@ using System.Web.UI.WebControls;
 
 namespace Tour_Management
 {
+    // MIGRATED: See Pages/User/SignUp.cshtml.cs for the ASP.NET Core Razor Pages implementation.
     public partial class SignUpForm : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Register_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "insert into UserInfo(Email,FirstName,LastName,Gender,Password,dob,Street,City,State) values(@email,@FirstName,@LastName,@Gender,@Password,@dob,@Street,@City,@State)";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-            com.Parameters.AddWithValue("@Email", email.Text);
-            com.Parameters.AddWithValue("@FirstName", fname.Text);
-            com.Parameters.AddWithValue("@LastName", lname.Text);
-            com.Parameters.AddWithValue("@Gender", gender.Text);
-            com.Parameters.AddWithValue("@Password", password1.Text);
-            com.Parameters.AddWithValue("@dob", dob.Text);
-            com.Parameters.AddWithValue("@Street", street.Text);
-            com.Parameters.AddWithValue("@City", city.Text);
-            com.Parameters.AddWithValue("@State", state.Text);
-
-            com.ExecuteNonQuery();
-            Response.Write("Registration Successful");
-            Response.Redirect("userlogin.aspx");
-            Server.Transfer("usercrud.aspx");
-            conn.Close();
-
+            // MIGRATED to EF Core in Pages/User/SignUp.cshtml.cs (OnPostAsync)
+            // Direct SqlConnection replaced with TourManagementDbContext (cr-dotnet-0013)
+            // ConfigurationManager replaced with IConfiguration / environment variables (cr-dotnet-0010)
         }
-           
-}
     }
+}

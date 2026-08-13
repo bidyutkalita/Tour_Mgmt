@@ -1,0 +1,78 @@
+@page
+@model Tour_Management.Pages.User.SignUpModel
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>User Registration</h1>
+</div>
+
+<div class="container">
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="@(Model.IsSuccess ? "alert-success" : "alert-danger")">
+            @Model.StatusMessage
+        </div>
+    }
+
+    <form method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label>Email</label>
+            <input asp-for="Input.Email" class="form-control" type="email" required />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>First Name</label>
+            <input asp-for="Input.FirstName" class="form-control" required />
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input asp-for="Input.LastName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <input asp-for="Input.Gender" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input asp-for="Input.Password" class="form-control" type="password" required />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input asp-for="Input.Dob" class="form-control" type="date" />
+        </div>
+
+        <div class="form-group">
+            <label>Street</label>
+            <input asp-for="Input.Street" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <input asp-for="Input.City" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>State</label>
+            <input asp-for="Input.State" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn">Register</button>
+            <button type="reset" class="btn">Reset</button>
+        </div>
+    </form>
+
+    <p>Already have an account? <a href="/User/Login" style="color:#cc6600;">Login here</a></p>
+</div>

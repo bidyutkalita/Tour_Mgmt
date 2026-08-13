@@ -1,7 +1,18 @@
-﻿using System;
+// This file has been migrated to ASP.NET Core Razor Pages.
+// New location: Pages/User/Order.cshtml.cs
+//
+// Changes applied:
+// - cr-dotnet-0026: Replaced ASP.NET Web Forms (System.Web.UI.Page) with ASP.NET Core Razor Pages (PageModel)
+//   Eliminates ViewState, postbacks, and server affinity requirements for stateless horizontal scaling.
+// - cr-dotnet-0013: Replaced direct SqlConnection management with Entity Framework Core DbContext,
+//   enabling built-in connection pooling, retry logic, and Azure SQL Database integration
+//   with transient fault handling.
+// - cr-dotnet-0010: Replaced Web.config / ConfigurationManager.ConnectionStrings with
+//   ASP.NET Core IConfiguration reading from appsettings.{Environment}.json and
+//   environment variables (CONNECTIONSTRINGS__DBCONNECTION) for runtime configuration.
+
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,36 +20,18 @@ using System.Web.UI.WebControls;
 
 namespace Tour_Management
 {
+    // MIGRATED: See Pages/User/Order.cshtml.cs for the ASP.NET Core Razor Pages implementation.
     public partial class Order : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
         }
 
         protected void btn_click(object sender, EventArgs e)
         {
-               SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-                conn.Open();
-                string insertQuery = "insert into booking(TOUR_NAME,PLACE,Email,FirstName) values(@TOUR_NAME,@PLACE,@Email,@FirstName)";
-                SqlCommand com = new SqlCommand(insertQuery, conn);
-                com.Parameters.AddWithValue("@TOUR_NAME", tour_name.Text);
-                
-                com.Parameters.AddWithValue("@PLACE", city.Text);
-               
-                com.Parameters.AddWithValue("@Email",number.Text);
-                com.Parameters.AddWithValue("@FirstName", name.Text);
-
-                com.ExecuteNonQuery();
-                Response.Write("Registration Successful");
-                Response.Redirect("mybooking.aspx");
-                Server.Transfer("mybooking.aspx");
-                conn.Close();
-
-
-
-            
-           
+            // MIGRATED to EF Core in Pages/User/Order.cshtml.cs (OnPostAsync)
+            // Direct SqlConnection replaced with TourManagementDbContext (cr-dotnet-0013)
+            // ConfigurationManager replaced with IConfiguration / environment variables (cr-dotnet-0010)
         }
     }
 }

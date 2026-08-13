@@ -1,0 +1,46 @@
+@page
+@model Tour_Management.Pages.Admin.AllBookingModel
+@{
+    ViewData["Title"] = "All Bookings";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>All Bookings</h1>
+</div>
+
+<div class="container">
+    @if (Model.Bookings.Any())
+    {
+        <table style="width:100%; color:white; border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th style="border:1px solid white; padding:8px;">ID</th>
+                    <th style="border:1px solid white; padding:8px;">Tour Name</th>
+                    <th style="border:1px solid white; padding:8px;">Place</th>
+                    <th style="border:1px solid white; padding:8px;">Email</th>
+                    <th style="border:1px solid white; padding:8px;">First Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model.Bookings)
+                {
+                    <tr>
+                        <td style="border:1px solid white; padding:8px;">@booking.Id</td>
+                        <td style="border:1px solid white; padding:8px;">@booking.TourName</td>
+                        <td style="border:1px solid white; padding:8px;">@booking.Place</td>
+                        <td style="border:1px solid white; padding:8px;">@booking.Email</td>
+                        <td style="border:1px solid white; padding:8px;">@booking.FirstName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No bookings found.</p>
+    }
+
+    <br />
+    <a href="/Admin/AdminProfile" class="btn">Back to Dashboard</a>
+</div>

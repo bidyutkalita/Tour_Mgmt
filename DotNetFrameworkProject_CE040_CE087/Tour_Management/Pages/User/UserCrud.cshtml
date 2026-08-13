@@ -1,0 +1,58 @@
+@page
+@model Tour_Management.Pages.User.UserCrudModel
+@{
+    ViewData["Title"] = "User Management";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>User Management</h1>
+</div>
+
+<div class="container">
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="@(Model.IsSuccess ? "alert-success" : "alert-danger")">
+            @Model.StatusMessage
+        </div>
+    }
+
+    @if (Model.Users.Any())
+    {
+        <table style="width:100%; color:white; border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th style="border:1px solid white; padding:8px;">ID</th>
+                    <th style="border:1px solid white; padding:8px;">Email</th>
+                    <th style="border:1px solid white; padding:8px;">First Name</th>
+                    <th style="border:1px solid white; padding:8px;">Last Name</th>
+                    <th style="border:1px solid white; padding:8px;">City</th>
+                    <th style="border:1px solid white; padding:8px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td style="border:1px solid white; padding:8px;">@user.Id</td>
+                        <td style="border:1px solid white; padding:8px;">@user.Email</td>
+                        <td style="border:1px solid white; padding:8px;">@user.FirstName</td>
+                        <td style="border:1px solid white; padding:8px;">@user.LastName</td>
+                        <td style="border:1px solid white; padding:8px;">@user.City</td>
+                        <td style="border:1px solid white; padding:8px;">
+                            <form method="post" asp-page-handler="Delete" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <button type="submit" class="btn" onclick="return confirm('Delete this user?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No users found.</p>
+    }
+</div>

@@ -1,7 +1,18 @@
-﻿using System;
+// This file has been migrated to ASP.NET Core Razor Pages.
+// New location: Pages/User/Login.cshtml.cs
+//
+// Changes applied:
+// - cr-dotnet-0026: Replaced ASP.NET Web Forms (System.Web.UI.Page) with ASP.NET Core Razor Pages (PageModel)
+//   Eliminates ViewState, postbacks, and server affinity requirements for stateless horizontal scaling.
+// - cr-dotnet-0013: Replaced direct SqlConnection management with Entity Framework Core DbContext,
+//   enabling built-in connection pooling, retry logic, and Azure SQL Database integration
+//   with transient fault handling. Also fixed SQL injection vulnerability (raw string concatenation).
+// - cr-dotnet-0010: Replaced Web.config / ConfigurationManager.ConnectionStrings with
+//   ASP.NET Core IConfiguration reading from appsettings.{Environment}.json and
+//   environment variables (CONNECTIONSTRINGS__DBCONNECTION) for runtime configuration.
+
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,55 +20,24 @@ using System.Web.UI.WebControls;
 
 namespace Tour_Management
 {
+    // MIGRATED: See Pages/User/Login.cshtml.cs for the ASP.NET Core Razor Pages implementation.
     public partial class userlogin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
-  
-            protected void Btn_Submit(object sender, EventArgs e)
-            { 
-            
-               
-
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-                conn.Open();
-                string checkPasswordQuery = "select password from Userinfo where password='" + txtPassword.Text + "' and email = '" + txtEmail.Text + "'";
-                SqlCommand passComm = new SqlCommand(checkPasswordQuery, conn);
-            string password = passComm.ExecuteScalar()?.ToString() ?? "";
-
-
-              
-
-                if (password == txtPassword.Text)
-                {
-                    //Session["New"] = txtEmail.Text;
-                Response.Write("Password is correct");
-                
-                Response.Redirect("MainProfilePage.aspx");
-                    Server.Transfer(  "MainProfilePage.aspx");
-                }
-
-
-            
-            else
-                {
-                    Response.Write("Password is not correct");
-                
-            }
-
-
-
-
-            }
+        protected void Btn_Submit(object sender, EventArgs e)
+        {
+            // MIGRATED to EF Core in Pages/User/Login.cshtml.cs (OnPostAsync)
+            // Direct SqlConnection replaced with TourManagementDbContext (cr-dotnet-0013)
+            // SQL injection vulnerability fixed with EF Core parameterized queries
+            // ConfigurationManager replaced with IConfiguration / environment variables (cr-dotnet-0010)
+        }
 
         protected void Btn_reg(object sender, EventArgs e)
         {
-            Response.Redirect("SignUpForm.aspx");
-            Server.Transfer("SignUpForm.aspx");
+            // MIGRATED: Redirect handled in Pages/User/Login.cshtml
         }
     }
-   
 }

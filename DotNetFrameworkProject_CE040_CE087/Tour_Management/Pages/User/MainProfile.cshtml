@@ -1,0 +1,18 @@
+@page
+@model Tour_Management.Pages.User.MainProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Welcome, @Model.UserEmail</h1>
+</div>
+
+<div class="container">
+    <div class="form-group">
+        <a href="/Tours/DisplayTours" class="btn">Browse Tours</a>
+        <a href="/User/MyBooking" class="btn">My Bookings</a>
+        <a href="/User/Login" class="btn">Logout</a>
+    </div>
+</div>

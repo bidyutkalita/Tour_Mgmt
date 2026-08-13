@@ -1,0 +1,62 @@
+@page
+@model Tour_Management.Pages.Tours.TourCrudModel
+@{
+    ViewData["Title"] = "Tour Management";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Tour Management</h1>
+</div>
+
+<div class="container">
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="@(Model.IsSuccess ? "alert-success" : "alert-danger")">
+            @Model.StatusMessage
+        </div>
+    }
+
+    <h2>All Tours</h2>
+    @if (Model.Tours.Any())
+    {
+        <table style="width:100%; color:white; border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th style="border:1px solid white; padding:8px;">ID</th>
+                    <th style="border:1px solid white; padding:8px;">Tour Name</th>
+                    <th style="border:1px solid white; padding:8px;">Place</th>
+                    <th style="border:1px solid white; padding:8px;">Days</th>
+                    <th style="border:1px solid white; padding:8px;">Price</th>
+                    <th style="border:1px solid white; padding:8px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tour in Model.Tours)
+                {
+                    <tr>
+                        <td style="border:1px solid white; padding:8px;">@tour.Id</td>
+                        <td style="border:1px solid white; padding:8px;">@tour.TourName</td>
+                        <td style="border:1px solid white; padding:8px;">@tour.Place</td>
+                        <td style="border:1px solid white; padding:8px;">@tour.Days</td>
+                        <td style="border:1px solid white; padding:8px;">@tour.Price.ToString("C")</td>
+                        <td style="border:1px solid white; padding:8px;">
+                            <form method="post" asp-page-handler="Delete" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@tour.Id" />
+                                <button type="submit" class="btn" onclick="return confirm('Delete this tour?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No tours found.</p>
+    }
+
+    <br />
+    <a href="/Tours/AddTour" class="btn">Add New Tour</a>
+</div>
