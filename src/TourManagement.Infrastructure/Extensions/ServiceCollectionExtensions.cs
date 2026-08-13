@@ -19,14 +19,22 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // Register DbContext
+        // Configure Npgsql to use legacy timestamp behavior for DateTime compatibility
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+        // Register DbContext with PostgreSQL provider
         services.AddDbContext<TourManagementDbContext>(options =>
-            options.UseSqlServer(
+            options.UseNpgsql(
                 configuration.GetConnectionString("DefaultConnection"),
-                sqlOptions => sqlOptions.EnableRetryOnFailure(
-                    maxRetryCount: 3,
-                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null)));
+                npgsqlOptions =>
+                {
+                    npgsqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorCodesToAdd: null);
+                    npgsqlOptions.MigrationsHistoryTable("__ef_migrations_history", "public");
+                })
+            .UseSnakeCaseNamingConvention());
 
         // Register repositories
         services.AddScoped<ITourRepository, TourRepository>();

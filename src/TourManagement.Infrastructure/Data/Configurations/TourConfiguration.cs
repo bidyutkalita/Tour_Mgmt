@@ -11,42 +11,42 @@ public class TourConfiguration : IEntityTypeConfiguration<Tour>
 {
     public void Configure(EntityTypeBuilder<Tour> builder)
     {
-        builder.ToTable("Tour");
+        builder.ToTable("tour");
 
         builder.HasKey(t => t.TourId);
 
         builder.Property(t => t.TourId)
-            .HasColumnName("TOUR_ID")
-            .UseIdentityColumn();
+            .HasColumnName("tour_id")
+            .UseIdentityAlwaysColumn();
 
         builder.Property(t => t.TourName)
             .IsRequired()
-            .HasColumnName("TOUR_NAME")
+            .HasColumnName("tour_name")
             .HasMaxLength(20);
 
         builder.Property(t => t.Place)
             .IsRequired()
-            .HasColumnName("PLACE")
+            .HasColumnName("place")
             .HasMaxLength(20);
 
         builder.Property(t => t.Days)
             .IsRequired()
-            .HasColumnName("DAYS")
+            .HasColumnName("days")
             .HasColumnType("numeric(2,0)");
 
         builder.Property(t => t.Price)
             .IsRequired()
-            .HasColumnName("PRICE")
+            .HasColumnName("price")
             .HasColumnType("numeric(6,0)");
 
         builder.Property(t => t.Locations)
             .IsRequired()
-            .HasColumnName("LOCATIONS")
+            .HasColumnName("locations")
             .HasMaxLength(100);
 
         builder.Property(t => t.TourInfo)
             .IsRequired()
-            .HasColumnName("TOUR_INFO")
+            .HasColumnName("tour_info")
             .HasMaxLength(200);
 
         builder.Property(t => t.Pic)

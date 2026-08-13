@@ -16,28 +16,28 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
         builder.HasKey(b => b.BookingId);
 
         builder.Property(b => b.BookingId)
-            .HasColumnName("TOUR_ID")
-            .UseIdentityColumn();
+            .HasColumnName("booking_id")
+            .UseIdentityAlwaysColumn();
 
         builder.Property(b => b.TourName)
-            .HasColumnName("TOUR_NAME")
+            .HasColumnName("tour_name")
             .HasMaxLength(50);
 
         builder.Property(b => b.Place)
-            .HasColumnName("PLACE")
+            .HasColumnName("place")
             .HasMaxLength(50);
 
         builder.Property(b => b.Email)
-            .HasColumnName("Email")
+            .HasColumnName("email")
             .HasMaxLength(50);
 
         builder.Property(b => b.FirstName)
-            .HasColumnName("FirstName")
+            .HasColumnName("first_name")
             .HasMaxLength(50);
 
         builder.Property(b => b.BookingDate)
-            .HasColumnName("BookingDate")
-            .HasDefaultValueSql("GETUTCDATE()");
+            .HasColumnName("booking_date")
+            .HasDefaultValueSql("NOW()");
 
         builder.HasOne(b => b.User)
             .WithMany(u => u.Bookings)
