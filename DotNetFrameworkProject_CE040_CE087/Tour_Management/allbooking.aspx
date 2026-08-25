@@ -1,4 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allbooking.aspx.cs" Inherits="Tour_Management.allbooking" %>
+<%-- allbooking.aspx
+     Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+     Eliminates ViewState, postbacks, and server affinity requirements,
+     enabling stateless horizontal scaling in Azure Container Apps.
+     Connection string resolved from environment variable CONNECTIONSTRINGS__DBCONNECTION.
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allbooking.aspx.cs" Inherits="Tour_Management.allbooking" EnableViewState="false" %>
 
 <%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
 

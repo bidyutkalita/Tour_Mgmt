@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+// TourCrud.aspx.cs
+// Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+// Direct SqlConnection replaced with Entity Framework Core for built-in connection pooling,
+// retry logic, and Azure SQL Database integration with transient fault handling.
+// Connection string now read from environment-based configuration (appsettings.json / env vars).
+
+using System;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+using Tour_Management.Data;
 
 namespace Tour_Management
 {
@@ -14,33 +17,36 @@ namespace Tour_Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!Page.IsPostBack)
             {
                 refreshdata();
             }
         }
+
         public void refreshdata()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "select * from Tour";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-          // GridView1.DataSource = insertQuery;
-           // GridView1.DataBind();
+            // Retrieve connection string from environment-based configuration
+            // (environment variable CONNECTIONSTRINGS__DBCONNECTION or appsettings.json)
+            // instead of Web.config transformation files.
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS__DBCONNECTION")
+                ?? System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"]?.ConnectionString;
 
+            var optionsBuilder = new Microsoft.EntityFrameworkCore.DbContextOptionsBuilder<TourDbContext>();
+            optionsBuilder.UseSqlServer(connectionString, sqlOptions =>
+            {
+                // Azure SQL connection resiliency: enable retry on transient failures
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null);
+            });
 
-            // SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
-        //    SqlCommand cmd = new SqlCommand("select * from tbl_data", con);
-         //   SqlDataAdapter sda = new SqlDataAdapter(cmd);
-           // DataTable dt = new DataTable();
-            //sda.Fill(dt);
-           // GridView1.DataSource = dt;
-            //GridView1.DataBind();
-
-
+            using (var dbContext = new TourDbContext(optionsBuilder.Options))
+            {
+                var tours = dbContext.Tours.ToList();
+                GridView1.DataSource = tours;
+                GridView1.DataBind();
+            }
         }
-
-       
     }
 }

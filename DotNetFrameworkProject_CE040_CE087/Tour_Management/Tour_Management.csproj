@@ -66,6 +66,16 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <!-- Entity Framework Core packages for Azure SQL connection resiliency (cr-dotnet-0013) -->
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.6.0.0\lib\net461\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.6.0.0\lib\net461\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.6.0.0\lib\net461\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddTour.aspx" />
@@ -85,6 +95,10 @@
     <Content Include="usercrud.aspx" />
     <Content Include="userlogin.aspx" />
     <Content Include="Web.config" />
+    <!-- Environment-based configuration files (replaces Web.config transformations) -->
+    <Content Include="appsettings.json" />
+    <Content Include="appsettings.Development.json" />
+    <Content Include="appsettings.Production.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddTour.aspx.cs">
@@ -172,6 +186,9 @@
     <Compile Include="userlogin.aspx.designer.cs">
       <DependentUpon>userlogin.aspx</DependentUpon>
     </Compile>
+    <!-- EF Core Data Context and Models (cr-dotnet-0013) -->
+    <Compile Include="Data\TourDbContext.cs" />
+    <Compile Include="Models\TourModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -185,6 +202,8 @@
   <ItemGroup>
     <Folder Include="pics\" />
     <Folder Include="Tour_pics\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -217,11 +236,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

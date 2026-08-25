@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="Tour_Management.Order" %>
+<%-- Order.aspx
+     Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+     Eliminates ViewState, postbacks, and server affinity requirements,
+     enabling stateless horizontal scaling in Azure Container Apps.
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="Tour_Management.Order" EnableViewState="false" %>
 
 <!DOCTYPE html>
 

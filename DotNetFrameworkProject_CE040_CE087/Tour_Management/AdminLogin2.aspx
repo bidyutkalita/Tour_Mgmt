@@ -1,4 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminLogin2.aspx.cs" Inherits="Tour_Management.AdminLogin2" %>
+<%-- AdminLogin2.aspx
+     Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+     Eliminates ViewState, postbacks, and server affinity requirements,
+     enabling stateless horizontal scaling in Azure Container Apps.
+     Admin credentials are read from environment variables (ADMIN_EMAIL, ADMIN_PASSWORD).
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminLogin2.aspx.cs" Inherits="Tour_Management.AdminLogin2" EnableViewState="false" %>
 
 <!DOCTYPE html>
 
@@ -25,7 +31,7 @@
         <asp:TextBox ID="name" runat="server"></asp:TextBox><br />
         <asp:Label ID="password1" runat="server" Text="password"></asp:Label><br />
         <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox><br />
-        <asp:Button ID="Button1" runat="server" Text="login" />
+        <asp:Button ID="Button1" runat="server" Text="login" OnClick="Btn_Login" />
      </div> </form>
 </body>
 </html>

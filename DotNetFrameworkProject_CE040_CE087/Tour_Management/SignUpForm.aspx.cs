@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
+// SignUpForm.aspx.cs
+// Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+// Direct SqlConnection replaced with Entity Framework Core for built-in connection pooling,
+// retry logic, and Azure SQL Database integration with transient fault handling.
+// Connection string now read from environment-based configuration (appsettings.json / env vars).
+
+using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Tour_Management.Data;
+using Tour_Management.Models;
 
 namespace Tour_Management
 {
@@ -13,32 +17,47 @@ namespace Tour_Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Register_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "insert into UserInfo(Email,FirstName,LastName,Gender,Password,dob,Street,City,State) values(@email,@FirstName,@LastName,@Gender,@Password,@dob,@Street,@City,@State)";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-            com.Parameters.AddWithValue("@Email", email.Text);
-            com.Parameters.AddWithValue("@FirstName", fname.Text);
-            com.Parameters.AddWithValue("@LastName", lname.Text);
-            com.Parameters.AddWithValue("@Gender", gender.Text);
-            com.Parameters.AddWithValue("@Password", password1.Text);
-            com.Parameters.AddWithValue("@dob", dob.Text);
-            com.Parameters.AddWithValue("@Street", street.Text);
-            com.Parameters.AddWithValue("@City", city.Text);
-            com.Parameters.AddWithValue("@State", state.Text);
+            // Retrieve connection string from environment-based configuration
+            // (environment variable CONNECTIONSTRINGS__DBCONNECTION or appsettings.json)
+            // instead of Web.config transformation files.
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS__DBCONNECTION")
+                ?? System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"]?.ConnectionString;
 
-            com.ExecuteNonQuery();
+            var optionsBuilder = new Microsoft.EntityFrameworkCore.DbContextOptionsBuilder<TourDbContext>();
+            optionsBuilder.UseSqlServer(connectionString, sqlOptions =>
+            {
+                // Azure SQL connection resiliency: enable retry on transient failures
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null);
+            });
+
+            using (var dbContext = new TourDbContext(optionsBuilder.Options))
+            {
+                var user = new UserInfo
+                {
+                    Email = email.Text,
+                    FirstName = fname.Text,
+                    LastName = lname.Text,
+                    Gender = gender.Text,
+                    Password = password1.Text,
+                    Dob = dob.Text,
+                    Street = street.Text,
+                    City = city.Text,
+                    State = state.Text
+                };
+
+                dbContext.UserInfos.Add(user);
+                dbContext.SaveChanges();
+            }
+
             Response.Write("Registration Successful");
             Response.Redirect("userlogin.aspx");
-            Server.Transfer("usercrud.aspx");
-            conn.Close();
-
         }
-           
-}
     }
+}

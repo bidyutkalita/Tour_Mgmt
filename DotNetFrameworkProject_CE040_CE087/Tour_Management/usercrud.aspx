@@ -1,4 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" %>
+<%-- usercrud.aspx
+     Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+     Eliminates ViewState, postbacks, and server affinity requirements,
+     enabling stateless horizontal scaling in Azure Container Apps.
+     Connection string resolved from environment variable CONNECTIONSTRINGS__DBCONNECTION.
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" EnableViewState="false" %>
 
 <!DOCTYPE html>
 

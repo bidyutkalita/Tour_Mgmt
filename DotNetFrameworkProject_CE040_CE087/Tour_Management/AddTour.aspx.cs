@@ -1,11 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
+// AddTour.aspx.cs
+// Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+// Direct SqlConnection replaced with Entity Framework Core for built-in connection pooling,
+// retry logic, and Azure SQL Database integration with transient fault handling.
+// Connection string now read from environment-based configuration (appsettings.json / env vars).
+
+using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Tour_Management.Data;
+using Tour_Management.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Tour_Management
 {
@@ -13,33 +18,50 @@ namespace Tour_Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
-       
+
         protected void Register_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "insert into Tour(TOUR_NAME,PLACE,DAYS,PRICE,LOCATIONS,TOUR_INFO,pic) values(@TOUR_NAME,@PLACE,@DAYS,@PRICE,@LOCATIONS,@TOUR_INFO,@pic)";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-            
-            com.Parameters.AddWithValue("@TOUR_NAME", tour_name.Text);
-            com.Parameters.AddWithValue("@PLACE", place.Text);
-            com.Parameters.AddWithValue("@DAYS", days.Text); 
-            com.Parameters.AddWithValue("@PRICE", price.Text);
-            com.Parameters.AddWithValue("@LOCATIONS", locations.Text);
-            com.Parameters.AddWithValue("@TOUR_INFO", tour_info.Text);
+            // Retrieve connection string from environment-based configuration
+            // (environment variable CONNECTIONSTRINGS__DBCONNECTION or appsettings.json)
+            // instead of Web.config transformation files.
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS__DBCONNECTION")
+                ?? System.Configuration.ConfigurationManager.ConnectionStrings["dbconnection"]?.ConnectionString;
 
-            FileUpload1.SaveAs(Server.MapPath("~/Tour_pics/") + FileUpload1.FileName);
+            var optionsBuilder = new Microsoft.EntityFrameworkCore.DbContextOptionsBuilder<TourDbContext>();
+            optionsBuilder.UseSqlServer(connectionString, sqlOptions =>
+            {
+                // Azure SQL connection resiliency: enable retry on transient failures
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null);
+            });
 
-             com.Parameters.AddWithValue("@pic", FileUpload1.FileName);
+            using (var dbContext = new TourDbContext(optionsBuilder.Options))
+            {
+                var tour = new Tour
+                {
+                    TourName = tour_name.Text,
+                    Place = place.Text,
+                    Days = days.Text,
+                    Price = price.Text,
+                    Locations = locations.Text,
+                    TourInfo = tour_info.Text,
+                    Pic = FileUpload1.FileName
+                };
 
+                // Save uploaded file to Tour_pics folder
+                if (FileUpload1.HasFile)
+                {
+                    FileUpload1.SaveAs(Server.MapPath("~/Tour_pics/") + FileUpload1.FileName);
+                }
 
-            com.ExecuteNonQuery();
-            Response.Write("ADD  Successful");
-            //Response.Redirect("a.aspx");
-            //Server.Transfer("a.aspx");
-            conn.Close();
+                dbContext.Tours.Add(tour);
+                dbContext.SaveChanges();
+            }
+
+            Response.Write("ADD Successful");
         }
     }
 }

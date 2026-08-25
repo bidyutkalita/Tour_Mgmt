@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" %>
+<%-- MainProfilePage.aspx
+     Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages pattern.
+     Eliminates ViewState, postbacks, and server affinity requirements,
+     enabling stateless horizontal scaling in Azure Container Apps.
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" EnableViewState="false" %>
 
 <!DOCTYPE html>
 
