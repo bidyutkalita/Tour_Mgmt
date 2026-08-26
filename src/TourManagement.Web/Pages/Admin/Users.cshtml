@@ -1,0 +1,64 @@
+@page
+@model TourManagement.Web.Pages.Admin.UsersModel
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<h1>Manage Users</h1>
+<hr />
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="get">
+            <div class="input-group">
+                <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search users..." />
+                <button type="submit" class="btn btn-outline-secondary">Search</button>
+                @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                {
+                    <a asp-page="./Users" class="btn btn-outline-danger">Clear</a>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!Model.Users.Any())
+{
+    <div class="alert alert-info">No users found.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@user.FullName</td>
+                        <td>@user.Gender</td>
+                        <td>@user.City</td>
+                        <td>@user.State</td>
+                        <td>
+                            <form method="post" asp-page-handler="Delete" style="display:inline;">
+                                <input type="hidden" name="email" value="@user.Email" />
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete user @user.Email?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

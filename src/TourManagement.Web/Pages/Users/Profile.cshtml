@@ -1,0 +1,55 @@
+@page
+@model TourManagement.Web.Pages.Users.ProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<h1>My Profile</h1>
+<hr />
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@if (Model.Profile != null)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">👤 @Model.Profile.FullName</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.Profile.Email</dd>
+
+                        <dt class="col-sm-4">Gender</dt>
+                        <dd class="col-sm-8">@Model.Profile.Gender</dd>
+
+                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dd class="col-sm-8">@Model.Profile.Dob.ToString("dd MMM yyyy")</dd>
+
+                        <dt class="col-sm-4">Address</dt>
+                        <dd class="col-sm-8">@Model.Profile.Street, @Model.Profile.City, @Model.Profile.State</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <a asp-page="./Edit" class="btn btn-warning btn-sm">Edit Profile</a>
+                    <a asp-page="/Bookings/MyBookings" class="btn btn-primary btn-sm ms-2">My Bookings</a>
+                    <a asp-page="./Logout" class="btn btn-outline-danger btn-sm ms-2">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">Profile not found. Please login again.</div>
+    <a asp-page="./Login" class="btn btn-primary">Login</a>
+}
