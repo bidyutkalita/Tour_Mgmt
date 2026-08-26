@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="2c156e86-e73a-49cd-a721-eb1f08f55564" name="@e2a12b93de51 2026-08-26 13:38:24" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-08-26T13:38:24.6686339+00:00" queuing="2026-08-26T13:38:24.6686339+00:00" start="2026-08-26T13:38:23.9455282+00:00" finish="2026-08-26T13:38:24.7062886+00:00" />
+  <TestSettings name="default" id="205e6d07-e95d-4c01-890c-c6aaacad9b63">
+    <Deployment runDeploymentRoot="_e2a12b93de51_2026-08-26_13_38_24" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0002f896-3ae5-4331-903d-f4fa18a63af4" testId="3ba1e247-ee57-74ed-7d16-63387edd16d1" testName="TourManagement.UnitTests.Services.TourServiceTests.GetAllAsync_ShouldReturnAllTours" computerName="e2a12b93de51" duration="00:00:00.0052553" startTime="2026-08-26T13:38:24.6455323+00:00" endTime="2026-08-26T13:38:24.6455324+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0002f896-3ae5-4331-903d-f4fa18a63af4" />
+    <UnitTestResult executionId="671fc845-a371-46d2-81da-f4843c4d06d0" testId="33c535a6-870e-840b-b9a3-e373de904ba8" testName="TourManagement.UnitTests.Services.BookingServiceTests.DeleteAsync_WhenBookingNotFound_ShouldThrowNotFoundException" computerName="e2a12b93de51" duration="00:00:00.0134419" startTime="2026-08-26T13:38:24.6174600+00:00" endTime="2026-08-26T13:38:24.6174601+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="671fc845-a371-46d2-81da-f4843c4d06d0" />
+    <UnitTestResult executionId="326b9c2b-c2e8-4b5b-baeb-a88d2d079c3c" testId="a2128354-b0bf-fa03-ba7c-4c11432f07a3" testName="TourManagement.UnitTests.Services.TourServiceTests.UpdateAsync_WhenTourNotFound_ShouldThrowNotFoundException" computerName="e2a12b93de51" duration="00:00:00.0058775" startTime="2026-08-26T13:38:24.6195425+00:00" endTime="2026-08-26T13:38:24.6195426+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="326b9c2b-c2e8-4b5b-baeb-a88d2d079c3c" />
+    <UnitTestResult executionId="57ba45c5-f765-41c3-b5bd-a9cde2aac595" testId="6458705b-5a20-0fe7-44b9-7358bbb681fa" testName="TourManagement.UnitTests.Services.TourServiceTests.GetByIdAsync_WhenTourNotExists_ShouldReturnNull" computerName="e2a12b93de51" duration="00:00:00.0048557" startTime="2026-08-26T13:38:24.5987990+00:00" endTime="2026-08-26T13:38:24.5987990+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57ba45c5-f765-41c3-b5bd-a9cde2aac595" />
+    <UnitTestResult executionId="ef5a941d-6516-4c75-bc49-a7f9ca88dbef" testId="0d755c9c-ffd7-babe-a885-2b837ad09266" testName="TourManagement.UnitTests.Services.TourServiceTests.DeleteAsync_WhenTourNotFound_ShouldThrowNotFoundException" computerName="e2a12b93de51" duration="00:00:00.0065624" startTime="2026-08-26T13:38:24.6454870+00:00" endTime="2026-08-26T13:38:24.6454870+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef5a941d-6516-4c75-bc49-a7f9ca88dbef" />
+    <UnitTestResult executionId="bf5b2354-14b8-4872-87c4-ba40bdd5848b" testId="a21faf5f-cf22-963f-184b-f6ed0b9b709f" testName="TourManagement.UnitTests.Services.TourServiceTests.DeleteAsync_WhenTourExists_ShouldDeleteSuccessfully" computerName="e2a12b93de51" duration="00:00:00.0091597" startTime="2026-08-26T13:38:24.6135711+00:00" endTime="2026-08-26T13:38:24.6135712+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf5b2354-14b8-4872-87c4-ba40bdd5848b" />
+    <UnitTestResult executionId="a19609cb-fdae-4794-be22-5c152c3395bb" testId="d5447cf1-c8c5-cb1c-4ab5-26d0d864bede" testName="TourManagement.UnitTests.Services.BookingServiceTests.GetAllAsync_ShouldReturnAllBookings" computerName="e2a12b93de51" duration="00:00:00.0033680" startTime="2026-08-26T13:38:24.6452945+00:00" endTime="2026-08-26T13:38:24.6452946+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a19609cb-fdae-4794-be22-5c152c3395bb" />
+    <UnitTestResult executionId="298ca404-d5d8-446c-abd6-5e239fb8169a" testId="8f681a4c-926a-f1f0-d608-85aef99e8161" testName="TourManagement.UnitTests.Services.TourServiceTests.CreateAsync_ShouldCreateAndReturnTour" computerName="e2a12b93de51" duration="00:00:00.0054392" startTime="2026-08-26T13:38:24.6043411+00:00" endTime="2026-08-26T13:38:24.6043412+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="298ca404-d5d8-446c-abd6-5e239fb8169a" />
+    <UnitTestResult executionId="bf8a17fe-6343-498e-be5f-f0c00a361f49" testId="672a44e0-2796-d438-7c7f-78949d19ce39" testName="TourManagement.UnitTests.Services.BookingServiceTests.GetByUserEmailAsync_ShouldReturnUserBookings" computerName="e2a12b93de51" duration="00:00:00.0099946" startTime="2026-08-26T13:38:24.6039272+00:00" endTime="2026-08-26T13:38:24.6039273+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf8a17fe-6343-498e-be5f-f0c00a361f49" />
+    <UnitTestResult executionId="e8efdf71-7cfd-4b95-8b8a-94b6b223c1a6" testId="9609ec4c-8da3-b83a-0652-8b82d2fd8c27" testName="TourManagement.UnitTests.Services.BookingServiceTests.CreateAsync_ShouldCreateAndReturnBooking" computerName="e2a12b93de51" duration="00:00:00.1555836" startTime="2026-08-26T13:38:24.5970166+00:00" endTime="2026-08-26T13:38:24.5970166+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e8efdf71-7cfd-4b95-8b8a-94b6b223c1a6" />
+    <UnitTestResult executionId="72e409d8-7321-4817-8a3f-a855b8299db6" testId="30ccf6e1-9168-cead-3a0a-71e3f295405d" testName="TourManagement.UnitTests.Services.TourServiceTests.GetByIdAsync_WhenTourExists_ShouldReturnTour" computerName="e2a12b93de51" duration="00:00:00.1540152" startTime="2026-08-26T13:38:24.5942416+00:00" endTime="2026-08-26T13:38:24.5942591+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="72e409d8-7321-4817-8a3f-a855b8299db6" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.DeleteAsync_WhenTourExists_ShouldDeleteSuccessfully" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="a21faf5f-cf22-963f-184b-f6ed0b9b709f">
+      <Execution id="bf5b2354-14b8-4872-87c4-ba40bdd5848b" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="DeleteAsync_WhenTourExists_ShouldDeleteSuccessfully" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.DeleteAsync_WhenTourNotFound_ShouldThrowNotFoundException" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="0d755c9c-ffd7-babe-a885-2b837ad09266">
+      <Execution id="ef5a941d-6516-4c75-bc49-a7f9ca88dbef" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="DeleteAsync_WhenTourNotFound_ShouldThrowNotFoundException" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.GetAllAsync_ShouldReturnAllTours" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="3ba1e247-ee57-74ed-7d16-63387edd16d1">
+      <Execution id="0002f896-3ae5-4331-903d-f4fa18a63af4" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="GetAllAsync_ShouldReturnAllTours" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.BookingServiceTests.CreateAsync_ShouldCreateAndReturnBooking" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="9609ec4c-8da3-b83a-0652-8b82d2fd8c27">
+      <Execution id="e8efdf71-7cfd-4b95-8b8a-94b6b223c1a6" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.BookingServiceTests" name="CreateAsync_ShouldCreateAndReturnBooking" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.BookingServiceTests.DeleteAsync_WhenBookingNotFound_ShouldThrowNotFoundException" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="33c535a6-870e-840b-b9a3-e373de904ba8">
+      <Execution id="671fc845-a371-46d2-81da-f4843c4d06d0" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.BookingServiceTests" name="DeleteAsync_WhenBookingNotFound_ShouldThrowNotFoundException" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.BookingServiceTests.GetAllAsync_ShouldReturnAllBookings" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="d5447cf1-c8c5-cb1c-4ab5-26d0d864bede">
+      <Execution id="a19609cb-fdae-4794-be22-5c152c3395bb" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.BookingServiceTests" name="GetAllAsync_ShouldReturnAllBookings" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.GetByIdAsync_WhenTourExists_ShouldReturnTour" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="30ccf6e1-9168-cead-3a0a-71e3f295405d">
+      <Execution id="72e409d8-7321-4817-8a3f-a855b8299db6" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="GetByIdAsync_WhenTourExists_ShouldReturnTour" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.CreateAsync_ShouldCreateAndReturnTour" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="8f681a4c-926a-f1f0-d608-85aef99e8161">
+      <Execution id="298ca404-d5d8-446c-abd6-5e239fb8169a" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="CreateAsync_ShouldCreateAndReturnTour" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.GetByIdAsync_WhenTourNotExists_ShouldReturnNull" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="6458705b-5a20-0fe7-44b9-7358bbb681fa">
+      <Execution id="57ba45c5-f765-41c3-b5bd-a9cde2aac595" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="GetByIdAsync_WhenTourNotExists_ShouldReturnNull" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.BookingServiceTests.GetByUserEmailAsync_ShouldReturnUserBookings" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="672a44e0-2796-d438-7c7f-78949d19ce39">
+      <Execution id="bf8a17fe-6343-498e-be5f-f0c00a361f49" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.BookingServiceTests" name="GetByUserEmailAsync_ShouldReturnUserBookings" />
+    </UnitTest>
+    <UnitTest name="TourManagement.UnitTests.Services.TourServiceTests.UpdateAsync_WhenTourNotFound_ShouldThrowNotFoundException" storage="/modernize-data/studio-data/tnt1001/app734454/transformed-code/113/studio-workspace/v8/tests/tourmanagement.unittests/bin/debug/net9.0/tourmanagement.unittests.dll" id="a2128354-b0bf-fa03-ba7c-4c11432f07a3">
+      <Execution id="326b9c2b-c2e8-4b5b-baeb-a88d2d079c3c" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP734454/transformed-code/113/studio-workspace/v8/tests/TourManagement.UnitTests/bin/Debug/net9.0/TourManagement.UnitTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.UnitTests.Services.TourServiceTests" name="UpdateAsync_WhenTourNotFound_ShouldThrowNotFoundException" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="3ba1e247-ee57-74ed-7d16-63387edd16d1" executionId="0002f896-3ae5-4331-903d-f4fa18a63af4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="33c535a6-870e-840b-b9a3-e373de904ba8" executionId="671fc845-a371-46d2-81da-f4843c4d06d0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2128354-b0bf-fa03-ba7c-4c11432f07a3" executionId="326b9c2b-c2e8-4b5b-baeb-a88d2d079c3c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6458705b-5a20-0fe7-44b9-7358bbb681fa" executionId="57ba45c5-f765-41c3-b5bd-a9cde2aac595" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0d755c9c-ffd7-babe-a885-2b837ad09266" executionId="ef5a941d-6516-4c75-bc49-a7f9ca88dbef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a21faf5f-cf22-963f-184b-f6ed0b9b709f" executionId="bf5b2354-14b8-4872-87c4-ba40bdd5848b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5447cf1-c8c5-cb1c-4ab5-26d0d864bede" executionId="a19609cb-fdae-4794-be22-5c152c3395bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8f681a4c-926a-f1f0-d608-85aef99e8161" executionId="298ca404-d5d8-446c-abd6-5e239fb8169a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="672a44e0-2796-d438-7c7f-78949d19ce39" executionId="bf8a17fe-6343-498e-be5f-f0c00a361f49" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9609ec4c-8da3-b83a-0652-8b82d2fd8c27" executionId="e8efdf71-7cfd-4b95-8b8a-94b6b223c1a6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="30ccf6e1-9168-cead-3a0a-71e3f295405d" executionId="72e409d8-7321-4817-8a3f-a855b8299db6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="11" executed="11" passed="11" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.5)
+[xUnit.net 00:00:00.08]   Discovering: TourManagement.UnitTests
+[xUnit.net 00:00:00.11]   Discovered:  TourManagement.UnitTests
+[xUnit.net 00:00:00.12]   Starting:    TourManagement.UnitTests
+[xUnit.net 00:00:00.36]   Finished:    TourManagement.UnitTests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
