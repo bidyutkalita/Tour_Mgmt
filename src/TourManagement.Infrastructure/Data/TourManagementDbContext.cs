@@ -30,6 +30,13 @@ public class TourManagementDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        // Set default schema to "public" for PostgreSQL
+        modelBuilder.HasDefaultSchema("public");
+
+        // Enable PostgreSQL extensions
+        modelBuilder.HasPostgresExtension("uuid-ossp");
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TourManagementDbContext).Assembly);
     }
 }

@@ -22,18 +22,23 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // Register EF Core DbContext
+        // Configure legacy timestamp behavior for DateTime compatibility with PostgreSQL
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+        // Register EF Core DbContext with PostgreSQL provider
         services.AddDbContext<TourManagementDbContext>(options =>
         {
-            options.UseSqlServer(
+            options.UseNpgsql(
                 configuration.GetConnectionString("DefaultConnection"),
-                sqlOptions =>
+                npgsqlOptions =>
                 {
-                    sqlOptions.EnableRetryOnFailure(
+                    npgsqlOptions.EnableRetryOnFailure(
                         maxRetryCount: 5,
                         maxRetryDelay: TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd: null);
-                });
+                        errorCodesToAdd: null);
+                    npgsqlOptions.MigrationsHistoryTable("__ef_migrations_history", "public");
+                })
+                .UseSnakeCaseNamingConvention();
         });
 
         // Register repositories
