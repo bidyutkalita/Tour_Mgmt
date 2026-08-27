@@ -1,0 +1,62 @@
+/* Tour Management - Site CSS */
+
+/* Hero section */
+.hero-section {
+    background-attachment: fixed;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Tour image placeholder */
+.tour-img-placeholder {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Form styling */
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Badge styling */
+.badge {
+    font-size: 0.85em;
+}
+
+/* Table improvements */
+.table th {
+    font-weight: 600;
+}
+
+/* Navbar active link */
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+}
+
+/* Alert auto-dismiss animation */
+.alert {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

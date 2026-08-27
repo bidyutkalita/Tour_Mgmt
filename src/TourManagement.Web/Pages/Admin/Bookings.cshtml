@@ -1,0 +1,71 @@
+@page
+@model TourManagement.Web.Pages.Admin.BookingsModel
+@{
+    ViewData["Title"] = "All Bookings - Admin";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="bi bi-calendar-check me-2"></i>All Bookings</h1>
+        <a asp-page="Dashboard" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Dashboard
+        </a>
+    </div>
+
+    @if (!Model.Bookings.Any())
+    {
+        <div class="alert alert-info">No bookings found.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Tour Name</th>
+                        <th>Place</th>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Booked On</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Model.Bookings)
+                    {
+                        <tr>
+                            <td>@booking.BookingId</td>
+                            <td>@booking.TourName</td>
+                            <td>@booking.Place</td>
+                            <td>@booking.FirstName</td>
+                            <td>@booking.Email</td>
+                            <td>@booking.CreatedDate.ToString("dd MMM yyyy")</td>
+                            <td>
+                                @if (booking.IsActive)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Cancelled</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-page="/Bookings/Details" asp-route-id="@booking.BookingId"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-info-circle"></i>
+                                </a>
+                                <a asp-page="/Bookings/Delete" asp-route-id="@booking.BookingId"
+                                   class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

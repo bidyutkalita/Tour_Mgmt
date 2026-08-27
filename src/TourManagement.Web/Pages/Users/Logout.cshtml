@@ -1,0 +1,13 @@
+@page
+@model TourManagement.Web.Pages.Users.LogoutModel
+@{
+    ViewData["Title"] = "Logout";
+}
+
+<div class="container mt-4 text-center">
+    <h2>Logging out...</h2>
+    <form method="post">
+        <button type="submit" class="btn btn-danger">Confirm Logout</button>
+        <a asp-page="/Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+    </form>
+</div>
