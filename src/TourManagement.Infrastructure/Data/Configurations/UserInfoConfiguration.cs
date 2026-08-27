@@ -12,27 +12,32 @@ public class UserInfoConfiguration : IEntityTypeConfiguration<UserInfo>
     /// <summary>Configures the UserInfo entity mapping.</summary>
     public void Configure(EntityTypeBuilder<UserInfo> builder)
     {
-        builder.ToTable("UserInfo");
+        builder.ToTable("user_info");
 
         builder.HasKey(u => u.Email);
 
         builder.Property(u => u.Email)
+            .HasColumnName("email")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(u => u.FirstName)
+            .HasColumnName("first_name")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(u => u.LastName)
+            .HasColumnName("last_name")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(u => u.Gender)
+            .HasColumnName("gender")
             .HasMaxLength(10)
             .IsRequired();
 
         builder.Property(u => u.Password)
+            .HasColumnName("password")
             .HasMaxLength(256)
             .IsRequired();
 
@@ -42,21 +47,27 @@ public class UserInfoConfiguration : IEntityTypeConfiguration<UserInfo>
             .IsRequired();
 
         builder.Property(u => u.Street)
+            .HasColumnName("street")
             .HasMaxLength(200)
             .IsRequired();
 
         builder.Property(u => u.City)
+            .HasColumnName("city")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(u => u.State)
+            .HasColumnName("state")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(u => u.CreatedDate)
-            .HasDefaultValueSql("GETUTCDATE()");
+            .HasColumnName("created_date")
+            .HasColumnType("timestamp with time zone")
+            .HasDefaultValueSql("now()");
 
         builder.Property(u => u.IsActive)
+            .HasColumnName("is_active")
             .HasDefaultValue(true);
 
         // Relationship: UserInfo has many Bookings

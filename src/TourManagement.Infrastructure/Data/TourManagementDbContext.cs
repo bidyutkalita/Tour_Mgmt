@@ -28,6 +28,12 @@ public class TourManagementDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Set default schema to public for PostgreSQL
+        modelBuilder.HasDefaultSchema("public");
+
+        // Enable PostgreSQL extensions
+        modelBuilder.HasPostgresExtension("uuid-ossp");
+
         // Apply all entity configurations from this assembly
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TourManagementDbContext).Assembly);
     }

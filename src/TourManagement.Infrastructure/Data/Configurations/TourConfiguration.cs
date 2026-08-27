@@ -12,40 +12,40 @@ public class TourConfiguration : IEntityTypeConfiguration<Tour>
     /// <summary>Configures the Tour entity mapping.</summary>
     public void Configure(EntityTypeBuilder<Tour> builder)
     {
-        builder.ToTable("Tour");
+        builder.ToTable("tour");
 
         builder.HasKey(t => t.TourId);
 
         builder.Property(t => t.TourId)
-            .HasColumnName("TOUR_ID")
-            .UseIdentityColumn();
+            .HasColumnName("tour_id")
+            .UseIdentityAlwaysColumn();
 
         builder.Property(t => t.TourName)
-            .HasColumnName("TOUR_NAME")
+            .HasColumnName("tour_name")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(t => t.Place)
-            .HasColumnName("PLACE")
+            .HasColumnName("place")
             .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(t => t.Days)
-            .HasColumnName("DAYS")
+            .HasColumnName("days")
             .IsRequired();
 
         builder.Property(t => t.Price)
-            .HasColumnName("PRICE")
-            .HasColumnType("decimal(10,2)")
+            .HasColumnName("price")
+            .HasColumnType("numeric(10,2)")
             .IsRequired();
 
         builder.Property(t => t.Locations)
-            .HasColumnName("LOCATIONS")
+            .HasColumnName("locations")
             .HasMaxLength(500)
             .IsRequired();
 
         builder.Property(t => t.TourInfo)
-            .HasColumnName("TOUR_INFO")
+            .HasColumnName("tour_info")
             .HasMaxLength(1000)
             .IsRequired();
 
@@ -54,9 +54,12 @@ public class TourConfiguration : IEntityTypeConfiguration<Tour>
             .HasMaxLength(500);
 
         builder.Property(t => t.CreatedDate)
-            .HasDefaultValueSql("GETUTCDATE()");
+            .HasColumnName("created_date")
+            .HasColumnType("timestamp with time zone")
+            .HasDefaultValueSql("now()");
 
         builder.Property(t => t.IsActive)
+            .HasColumnName("is_active")
             .HasDefaultValue(true);
 
         // Relationship: Tour has many Bookings

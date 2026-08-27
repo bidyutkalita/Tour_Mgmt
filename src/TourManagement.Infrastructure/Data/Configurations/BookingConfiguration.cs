@@ -17,32 +17,36 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
         builder.HasKey(b => b.BookingId);
 
         builder.Property(b => b.BookingId)
-            .HasColumnName("TOUR_ID")
-            .UseIdentityColumn();
+            .HasColumnName("booking_id")
+            .UseIdentityAlwaysColumn();
 
         builder.Property(b => b.TourName)
-            .HasColumnName("TOUR_NAME")
+            .HasColumnName("tour_name")
             .HasMaxLength(100);
 
         builder.Property(b => b.Place)
-            .HasColumnName("PLACE")
+            .HasColumnName("place")
             .HasMaxLength(100);
 
         builder.Property(b => b.Email)
-            .HasColumnName("Email")
+            .HasColumnName("email")
             .HasMaxLength(100);
 
         builder.Property(b => b.FirstName)
-            .HasColumnName("FirstName")
+            .HasColumnName("first_name")
             .HasMaxLength(100);
 
         builder.Property(b => b.CreatedDate)
-            .HasDefaultValueSql("GETUTCDATE()");
+            .HasColumnName("created_date")
+            .HasColumnType("timestamp with time zone")
+            .HasDefaultValueSql("now()");
 
         builder.Property(b => b.IsActive)
+            .HasColumnName("is_active")
             .HasDefaultValue(true);
 
         builder.Property(b => b.TourId)
+            .HasColumnName("tour_id")
             .IsRequired(false);
     }
 }
