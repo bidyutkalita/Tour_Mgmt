@@ -1,0 +1,61 @@
+@page
+@model TourManagement.Web.Pages.Tours.IndexModel
+@{
+    ViewData["Title"] = "Available Tours";
+}
+
+<h2>Available Tours</h2>
+
+@if (!string.IsNullOrEmpty(Model.SearchTerm))
+{
+    <p>Search results for: <strong>@Model.SearchTerm</strong></p>
+}
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search tours by name or place..." />
+        <button type="submit" class="btn btn-warning">Search</button>
+        @if (!string.IsNullOrEmpty(Model.SearchTerm))
+        {
+            <a asp-page="/Tours/Index" class="btn btn-outline-secondary">Clear</a>
+        }
+    </div>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var tour in Model.Tours)
+    {
+        <div class="col">
+            <div class="card h-100 shadow">
+                @if (!string.IsNullOrEmpty(tour.Pic))
+                {
+                    <img src="~/Tour_pics/@tour.Pic" class="card-img-top" alt="@tour.TourName" style="height:200px;object-fit:cover;" />
+                }
+                else
+                {
+                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height:200px;">
+                        <span class="text-white fs-4">No Image</span>
+                    </div>
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@tour.TourName</h5>
+                    <p class="card-text">
+                        <strong>Place:</strong> @tour.Place<br />
+                        <strong>Days:</strong> @tour.Days<br />
+                        <strong>Price:</strong> ₹@tour.Price.ToString("N2")<br />
+                        <strong>Locations:</strong> @tour.Locations
+                    </p>
+                </div>
+                <div class="card-footer d-flex gap-2">
+                    <a asp-page="/Tours/Details" asp-route-id="@tour.TourId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="/Bookings/Create" asp-route-tourId="@tour.TourId" asp-route-tourName="@tour.TourName" class="btn btn-warning btn-sm">Book Now</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Tours.Any())
+{
+    <div class="alert alert-info mt-3">No tours found.</div>
+}

@@ -1,0 +1,45 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tours.DetailsModel
+@{
+    ViewData["Title"] = "Tour Details";
+}
+
+@if (Model.Tour != null)
+{
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h2>@Model.Tour.TourName</h2>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.Tour.Pic))
+                {
+                    <img src="~/Tour_pics/@Model.Tour.Pic" class="card-img-top" alt="@Model.Tour.TourName" style="max-height:400px;object-fit:cover;" />
+                }
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Place</dt>
+                        <dd class="col-sm-9">@Model.Tour.Place</dd>
+                        <dt class="col-sm-3">Days</dt>
+                        <dd class="col-sm-9">@Model.Tour.Days days</dd>
+                        <dt class="col-sm-3">Price</dt>
+                        <dd class="col-sm-9">₹@Model.Tour.Price.ToString("N2")</dd>
+                        <dt class="col-sm-3">Locations</dt>
+                        <dd class="col-sm-9">@Model.Tour.Locations</dd>
+                        <dt class="col-sm-3">Tour Info</dt>
+                        <dd class="col-sm-9">@Model.Tour.TourInfo</dd>
+                    </dl>
+                    <div class="d-flex gap-2">
+                        <a asp-page="/Bookings/Create" asp-route-tourId="@Model.Tour.TourId" asp-route-tourName="@Model.Tour.TourName" class="btn btn-warning">Book Now</a>
+                        <a asp-page="/Tours/Index" class="btn btn-outline-secondary">Back to Tours</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">Tour not found.</div>
+    <a asp-page="/Tours/Index" class="btn btn-secondary">Back to Tours</a>
+}

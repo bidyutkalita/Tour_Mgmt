@@ -1,0 +1,54 @@
+@page
+@model TourManagement.Web.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="jumbotron p-5 mb-4 bg-dark text-white rounded-3">
+    <div class="container-fluid py-3 text-center">
+        <h1 class="display-5 fw-bold">Welcome to the Admin Section</h1>
+        <p class="col-md-8 fs-4 mx-auto">
+            You can manage the admin work here.<br />
+            You can add tours and places for customers.
+        </p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5 class="card-title">Total Tours</h5>
+                <p class="card-text display-6">@Model.TotalTours</p>
+                <a asp-page="/Tours/Manage" class="btn btn-warning">Manage Tours</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5 class="card-title">Total Bookings</h5>
+                <p class="card-text display-6">@Model.TotalBookings</p>
+                <a asp-page="/Bookings/AllBookings" class="btn btn-info">View Bookings</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <p class="card-text display-6">@Model.TotalUsers</p>
+                <a asp-page="/Users/Index" class="btn btn-secondary">Manage Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5 class="card-title">Add New Tour</h5>
+                <p class="card-text">Create a new tour package</p>
+                <a asp-page="/Tours/Create" class="btn btn-success">Add Tour</a>
+            </div>
+        </div>
+    </div>
+</div>
