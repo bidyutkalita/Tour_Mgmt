@@ -1,0 +1,70 @@
+@page
+@model TourManagement.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Tour Management - Home";
+}
+
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <div class="jumbotron jumbotron-fluid text-white text-center py-5"
+         style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/Tour_pics/jumbotron.jpg') center/cover no-repeat;">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Welcome to Tour Management</h1>
+            <p class="lead">Discover amazing tours and book your dream vacation today!</p>
+            <a asp-page="/Tours/Index" class="btn btn-primary btn-lg me-2">Browse Tours</a>
+            <a asp-page="/Users/Register" class="btn btn-outline-light btn-lg">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Featured Tours -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Featured Tours</h2>
+        @if (Model.FeaturedTours.Any())
+        {
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var tour in Model.FeaturedTours)
+                {
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            @if (!string.IsNullOrEmpty(tour.Pic))
+                            {
+                                <img src="/Tour_pics/@tour.Pic" class="card-img-top" alt="@tour.TourName"
+                                     style="height: 200px; object-fit: cover;"
+                                     onerror="this.src='/images/default-tour.jpg'">
+                            }
+                            else
+                            {
+                                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center"
+                                     style="height: 200px;">
+                                    <span class="text-white fs-4">🌍</span>
+                                </div>
+                            }
+                            <div class="card-body">
+                                <h5 class="card-title">@tour.TourName</h5>
+                                <p class="card-text text-muted">
+                                    <i class="bi bi-geo-alt"></i> @tour.Place &nbsp;|&nbsp;
+                                    <i class="bi bi-calendar"></i> @tour.Days days
+                                </p>
+                                <p class="card-text">@tour.TourInfo</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-success fs-5">₹@tour.Price.ToString("N0")</span>
+                                <a asp-page="/Bookings/Create" asp-route-tourName="@tour.TourName"
+                                   asp-route-place="@tour.Place" class="btn btn-primary btn-sm">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center">
+                No tours available at the moment. Please check back later.
+            </div>
+        }
+        <div class="text-center mt-4">
+            <a asp-page="/Tours/Index" class="btn btn-outline-primary">View All Tours</a>
+        </div>
+    </div>
+</div>

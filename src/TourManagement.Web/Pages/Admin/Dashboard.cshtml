@@ -1,0 +1,61 @@
+@page
+@model TourManagement.Web.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container my-4">
+    <h2>Admin Dashboard</h2>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary shadow">
+                <div class="card-body text-center">
+                    <h3>@Model.TotalTours</h3>
+                    <p class="mb-0">Total Tours</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-page="/Tours/Index" class="text-white">Manage Tours →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success shadow">
+                <div class="card-body text-center">
+                    <h3>@Model.TotalBookings</h3>
+                    <p class="mb-0">Total Bookings</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-page="AllBookings" class="text-white">View Bookings →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info shadow">
+                <div class="card-body text-center">
+                    <h3>@Model.TotalUsers</h3>
+                    <p class="mb-0">Registered Users</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-page="Users" class="text-white">View Users →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">Quick Actions</div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Tours/Create" class="btn btn-success">Add New Tour</a>
+                        <a asp-page="AllBookings" class="btn btn-outline-primary">View All Bookings</a>
+                        <a asp-page="Users" class="btn btn-outline-info">Manage Users</a>
+                        <a asp-page="/Users/Logout" class="btn btn-outline-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
